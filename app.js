@@ -11,6 +11,12 @@ import index from './routes/index';
 const app = express();
 const debug = Debug('sg-wdi-10-project-3-nodejs:app');
 
+
+// Connect to mongo
+import mongoose from 'mongoose';
+mongoose.connect('mongodb://localhost/POS');
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

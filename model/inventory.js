@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
 const Inventory = mongoose.model('inventory', userSchema);
 
 const inventory = new Inventory ({
-  item: 'Wanton Mee',
+  item: 'Pork Chop',
   quantity: 2,
   price: 3
 });

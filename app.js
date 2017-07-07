@@ -7,6 +7,8 @@ import logger from 'morgan';
 import path from 'path';
 import lessMiddleware from 'less-middleware';
 import index from './routes/index';
+import inventoryAPI from './routes/inventory';
+import transactionAPI from './routes/transaction';
 
 const app = express();
 const debug = Debug('sg-wdi-10-project-3-nodejs:app');
@@ -34,6 +36,8 @@ app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+app.use('/apiInventory', inventoryAPI);
+app.use('/apiTransaction', transactionAPI);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

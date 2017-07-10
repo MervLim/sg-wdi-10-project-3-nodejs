@@ -19,4 +19,12 @@ router.get('/', (req, res, next) => {
 
 });
 
+router.get('/:id', (req, res, next) => {
+  let id = req.params.id
+  Inventory.findById({_id: id}, (err, item) => {
+    if (err) return err;
+    res.json(item)
+  })
+})
+
 export default router;

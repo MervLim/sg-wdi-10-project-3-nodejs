@@ -16,7 +16,13 @@ const debug = Debug('sg-wdi-10-project-3-nodejs:app');
 
 // Connect to mongo
 import mongoose from 'mongoose';
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/POS');
+mongoose.connection.on('error', (err) => {
+  console.error(err);
+  console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
+  process.exit();
+});
 
 
 // view engine setup
@@ -34,6 +40,11 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next){
+  console.log( "Method: " + req.method +" Path: " + req.url)
+  next();
+});
 
 app.use('/', index);
 app.use('/apiInventory', inventoryAPI);
